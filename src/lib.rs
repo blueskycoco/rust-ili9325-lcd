@@ -5,59 +5,59 @@ use hal::blocking::{
 };
 
 pub trait Interface {
-	fn write_command(&self, command: u16);
-	fn write_data(&self, data: u16);
-	fn read_data(&self, data: &mut u16);
-	fn reset(&self);
+    fn write_command(&self, command: u16);
+    fn write_data(&self, data: u16);
+    fn read_data(&self, data: &mut u16);
+    fn reset(&self);
 }
 
 #[derive(Copy, Clone, Default)]
 pub struct DisplayIdentification {
-	raw: u16,
+    raw: u16,
 }
 
 #[derive(Copy, Clone)]
 pub struct Controller<T>
-	where T: Interface
+    where T: Interface
 {
-	iface: T,
-	width: u16,
-	height: u16,
+    iface: T,
+    width: u16,
+    height: u16,
 }
 
 impl<T: Interface> Controller<T> 
-	where T: Interface
+    where T: Interface
 {
-	pub fn new(iface: T, width: u16, height: u16) -> Self {
-		Controller {
-			iface: iface,
-			width: width,
-			height: height,
-		}
-	}
+    pub fn new(iface: T, width: u16, height: u16) -> Self {
+        Controller {
+            iface: iface,
+            width: width,
+            height: height,
+        }
+    }
 
-	fn write_command(&self, command: u16) {
-		self.iface.write_command(command);
-	}
+    fn write_command(&self, command: u16) {
+        self.iface.write_command(command);
+    }
 
-	fn write_data(&self, data: u16) {
-		self.iface.write_data(data);
-	}
+    fn write_data(&self, data: u16) {
+        self.iface.write_data(data);
+    }
 
     fn write_cmd_data(&self, command: u16, data: u16) {
         self.write_command(command);
         self.write_data(data);
     }
 
-	fn read_data(&self, data: &mut u16) {
-	    self.iface.read_data(data);
+    fn read_data(&self, data: &mut u16) {
+        self.iface.read_data(data);
     }
 
     pub fn read_id(&self) -> DisplayIdentification {
-		let mut result = DisplayIdentification::default();
-		self.write_command(0x0000);
-		self.read_data(&mut result.raw);
-		result
+        let mut result = DisplayIdentification::default();
+        self.write_command(0x0000);
+        self.read_data(&mut result.raw);
+        result
     }
 
     pub fn width(&self) -> u16 {
