@@ -28,21 +28,21 @@ pub struct Controller<T>
 impl<T: Interface> Controller<T> 
 	where T: Interface
 {
-	pub fn new(iface: T, width: u16, height: u16) -> Self {
-		Controller {
-			iface: iface,
-			width: width,
-			height: height,
-		}
-	}
+    pub fn new(iface: T, width: u16, height: u16) -> Self {
+        Controller {
+            iface: iface,
+            width: width,
+            height: height,
+        }
+    }
 
-	fn write_command(&self, command: u16) {
-		self.iface.write_command(command);
-	}
+    fn write_command(&self, command: u16) {
+        self.iface.write_command(command);
+    }
 
-	fn write_data(&self, data: u16) {
-		self.iface.write_data(data);
-	}
+    fn write_data(&self, data: u16) {
+        self.iface.write_data(data);
+    }
 
     fn write_cmd_data(&self, command: u16, data: u16) {
         self.write_command(command);
