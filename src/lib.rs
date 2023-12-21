@@ -97,21 +97,21 @@ impl<T: Interface> Controller<T>
         self.write_cmd_data(0x00a4, 0x0000);
         self.write_cmd_data(0x0050, 0x0000);
         //self.write_cmd_data(0x0051,0x013F);
-        self.write_cmd_data(0x0051, 0x00EF);
+        self.write_cmd_data(0x0051, self.width - 1);
         self.write_cmd_data(0x0052, 0x0000);
-        self.write_cmd_data(0x0053, 0x013F);
+        self.write_cmd_data(0x0053, self.height - 1);
         //self.write_cmd_data(0x0053,0x00EF);
 
         self.write_cmd_data(0x0060, 0xA700);/* Driver Output Control */
         self.write_cmd_data(0x0061, 0x0003);/* Driver Output Control */
         self.write_cmd_data(0x006A, 0x0000);/* Vertical Scroll Control */
 
-        self.write_cmd_data(0x0080, 0x0000);/* Display Position ????Partial Display 1 */
-        self.write_cmd_data(0x0081, 0x0000);/* RAM Address Start ????Partial Display 1 */
+        self.write_cmd_data(0x0080, 0x0000);/* Display Position Partial Display 1 */
+        self.write_cmd_data(0x0081, 0x0000);/* RAM Address Start Partial Display 1 */
         self.write_cmd_data(0x0082, 0x0000);/* RAM address End - Partial Display 1 */
-        self.write_cmd_data(0x0083, 0x0000);/* Display Position ????Partial Display 2 */
-        self.write_cmd_data(0x0084, 0x0000);/* RAM Address Start ????Partial Display 2 */
-        self.write_cmd_data(0x0085, 0x0000);/* RAM address End ????Partail Display2 */
+        self.write_cmd_data(0x0083, 0x0000);/* Display Position Partial Display 2 */
+        self.write_cmd_data(0x0084, 0x0000);/* RAM Address Start Partial Display 2 */
+        self.write_cmd_data(0x0085, 0x0000);/* RAM address End Partail Display2 */
         self.write_cmd_data(0x0090, 0x0013);/* Frame Cycle Control */
         self.write_cmd_data(0x0092, 0x0000);/* Panel Interface Control 2 */
         self.write_cmd_data(0x0093, 0x0003);/* Panel Interface control 3 */
